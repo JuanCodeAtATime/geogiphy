@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="assets/CSS/reset.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="assets/CSS/style.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata|Michroma|Shadows+Into+Light&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>Geogiphy App</title>
+</head>
+
+<body>
+    <!-- 
+    Things I want to see:
+    Dropdown with all countries names
+    Search icon/magnafying glass
+    Stylized buttons with the User's selected countries
+    Prepended gifs -->
+    <div class="mainContainer">
+
+        <div class="jumbotron">
+
+            <div class="container" id="testTimer">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="display-4" id="gameTitle">Geogiphy</h1>
+                        <p class="lead">
+                            <h3 id="tagLine">Interesting Gifs by Country</h3>
+                        </p>
+                        <form role="form">
+                            <!-- Text box for capturing the search term-->
+                            <div class="form-group">
+                                <label for="search" id="search-label">Add a country:</label>
+                                <input type="text" class="form-control" id="search">
+                                <br>
+                                <button type="submit" class="btn btn-success btn-lg" id="searchBtn"
+                                    data-toggle="tooltip" title="Go ahead...Push me!">Search</button>
+                            </div>
+                        </form>
+                        <img src="./assets/images/giphyAttr.gif" style="width:150px;">
+                    </div>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+
+            <p class="triviaFont" id="question1">
+                <h3></h3>
+            </p>
+            <p class="triviaFont" id="choices"></p>
+            <p class="triviaFont" id="skipBtn"></p>
+            <p class="triviaFont" id="msg2"></p>
+
+            <!-- Change ID below to shorten length of input box -->
+
+
+        </div>
+
+        <div class="container">
+            <div class="row" id="triviaQuestion">
+                <h3 id="trivia"></h3>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="assets/javascript/logic.js">
+
+
+    </script>
+</body>
+
+</html>

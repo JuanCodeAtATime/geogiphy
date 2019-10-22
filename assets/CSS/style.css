@@ -1,0 +1,95 @@
+/* Things I want to see:
+    Dropdown with all countries names
+    Search icon/magnafying glass
+    Stylized buttons with the User's selected countries
+    Prepended gifs */
+
+
+body {
+/* These body properties placed my game in the center of the screen as desired. */
+    margin: 0;
+    background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url("../images/geography.jpg");
+    background-size: cover;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+#question1 {
+    font-size: 20px;
+}
+
+#timer {
+    /* This timer is placed in the horizontal red button 
+    that spans the jumbotron container */
+    height: auto;
+    font-size: 25px;
+    font-family: 'Michroma', sans-serif;
+    width: 100%;
+    margin: 10px;
+    align-content: center;
+    box-shadow: 0 0 10px 2px;
+    white-space: normal;
+    text-align: center;
+
+}
+
+#gameTitle {
+    font-size: 50px;
+    font-family: 'Michroma', sans-serif;
+    font-weight: bold;
+    margin: 0;
+    padding-top: 0;
+    align-content: center;
+
+}
+
+#tagLine {
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 35px;
+    padding: 0;
+}
+
+.jumbotron {
+    /* Dimmed the opacity to enhance the look  */
+    opacity: .87;
+    box-shadow: 0 0 10px 2px;
+    align-content: center;
+    padding-top: 35px;
+    
+}
+
+.triviaFont {
+    font-family: 'Michroma', sans-serif;
+    font-weight: bold;
+    align-content: center;
+}
+
+.mainContainer {
+   /* I chose 75% for the game box as it 
+   seemed aesthetically better than spanning 100% of the screen */
+    width: 40%;
+    margin: 0 auto;
+}
+
+#button-primary {
+    font-weight: 100;
+   
+}
+
+#choices {
+    font-family: 'Michroma', sans-serif;
+    display: grid;
+    grid-template-columns: repeat(2, auto) ;
+    gap: 7px;
+    border-radius: 10px;
+}
+
+/* Font families inventory:
+font-family: 'Inconsolata', monospace;
+font-family: 'Michroma', sans-serif;
+font-family: 'Shadows Into Light', cursive; */
+
+http://api.giphy.com/v1/gifs/search?q=canada&api_key=qFPDlYolJg3rML8RnElRJqnG83lhOD3T
