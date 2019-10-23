@@ -22,7 +22,7 @@
     Things I want to see:
     Dropdown with all countries names
     Search icon/magnafying glass
-    Stylized buttons with the User's selected countries
+    Stylized buttons with the User's selected countries (DONE)
     Prepended gifs -->
     <div class="mainContainer">
 
@@ -30,7 +30,7 @@
 
             <div class="container">
                 <div class="row">
-                    <div class="col-md">
+                    <div class="col-md-12">
                         <h1 class="display-4" id="appTitle">Geogiphy</h1>
                         <p class="lead">
                             <h3 id="tagLine">Interesting Gifs by Country</h3>
@@ -38,8 +38,8 @@
                         <form role="form">
                             <!-- Text box for capturing the searched Country name-->
                             <div class="form-group">
-                                <label for="search" id="search-label">Add a country:</label>
-                                <input type="text" class="form-control" placeholder="country" id="country-input">
+                                <!-- <label for="search" id="search-label">Add a country:</label> -->
+                                <input type="text" class="form-control" placeholder="Add a country" id="country-input">
                                 <br>
                                 <button type="submit" class="btn btn-success btn-lg" id="searchBtn"
                                     data-toggle="tooltip" title="Go ahead...Push me!">Search</button>
@@ -51,20 +51,26 @@
             </div>
             <hr>
             <div class="row">
-                <div class="col-md">
-                    <div id="country-buttons">skjfdnlksj</div>
+                <div class="col-md-12">
+                    <div id="country-buttons"></div>
                 </div>
             </div>
-        </div>
-
-        <div class="container">
-            <div class="row" id="triviaQuestion">
+            <hr>
+            <div class="container gifsContainer">
+                <div class="row" id="gifs">
+                    <div class="col-md-12">
+                        <p class="gifsPara">AWESOME GIFS HERE</p>
+                    </div>
+                </div>
 
             </div>
-
         </div>
 
     </div>
+
+
+
+
 
 
     <script src="assets/javascript/logic.js">

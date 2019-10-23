@@ -48,24 +48,23 @@ body {
 }
 
 .mainContainer {
-   /* I chose 75% for the game box as it 
+   /* I chose 65% for the main box as it 
    seemed aesthetically better than spanning 100% of the screen */
-    width: 100%;
+    width: 65%;
     display: flex;
     float: left;
-    margin-left:75px;
+    /* margin: ; */
 }
 
 #country-buttons {
 
-    /* float: left; */
     display: grid;
-    grid-template-columns: repeat(4, auto) ;
+    grid-template-columns: repeat(3, auto) ;
     gap: 7px;
     border-radius: 10px;
-    /* margin-right: 75px; */
     font-family: 'Michroma', sans-serif;
     font-size: .75rem;
+    font-weight: bolder;
     
 }
 
@@ -85,6 +84,28 @@ body {
 
 img {
  border-radius: 5px;
+
+}
+
+.gifsContainer {
+    background-color: rgba(255,255,255,0.95);
+    box-shadow: 0 0 10px 2px;
+    margin-top: 20px;
+    height: auto;
+    width: 100%;
+      
+}
+
+.gifsPara {
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 35px;
+    padding-top: 10px;
+    color:  rgba(0, 0, 0, 0.4);
+    text-align: center;
+    position: relative;
+    align-content: center;
+    margin: 5px;
+
 
 }
 

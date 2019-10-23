@@ -8,19 +8,20 @@
 // 6. Create code to dynamically generate HTML content
 //7. Create variable that links default country buttons w/queryURL to retrieve content from host
 
-// VARIABLES
+// INITIALIZING VARIABLES
 const apiKey = "&api_key=qFPDlYolJg3rML8RnElRJqnG83lhOD3T";
 let trendingAPI = "http://api.giphy.com/v1/gifs/trending?api_key=" + apiKey;
 let giphyURLBase = "http://api.giphy.com/v1/gifs/search";
 let queryCountry = "";
 let numOfGifs = "";
+let inputCountry = "";
 
 //These are the default countries displayed for User 
 let displayCountries = ["Afghanistan", "Brazil", "Canada", "China",
     "Cuba", "Ethiopia", "Greece", "Guatemala", "Haiti", "India",
     "Israel", "Mexico", "United Kingdom", "United States"];
 
-//Country list array for Auto-complete feature to enhance UX
+//Array of countries for Auto-complete feature to enhance UX
 let country_list = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla", "Antigua &amp; Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas"
     , "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia &amp; Herzegovina", "Botswana", "Brazil", "British Virgin Islands"
     , "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Chad", "Chile", "China", "Colombia", "Congo", "Cook Islands", "Costa Rica"
@@ -40,19 +41,31 @@ let country_list = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "A
 
 // FUNCTIONS
 
-// Function for capturing the country name from the data-attribute
+function runQuery(queryURL) {
 
-function runQuery(numOfGifs, queryURL) {
+    queryURL = "http://api.giphy.com/v1/gifs/search?q=" + queryCountry + apiKey + "&limit=10";
 
     $.ajax({
         url: queryURL,
         method: "GET"
-    }).done(function (giphyData) {
-
     })
+        .then(function (response) {
 
-    console.log()
+            let imageUrl = response.data[0].images.original.url;  //Fix this....Reference the Cat activity
+            console.log(imageUrl)
 
+
+            // Creating and storing an image tag
+            let countryGifs = $("<img>");
+
+            // Setting the countryGifs src attribute to imageUrl
+
+            countryGifs.attr("src", imageUrl);
+            countryGifs.attr("alt", "country gifs");
+
+            // Prepending the countryGifs to the images div
+            $("#gifs").prepend(countryGifs);
+        });
 
 }
 // MAIN PROCESSES
@@ -65,13 +78,16 @@ function runQuery(numOfGifs, queryURL) {
 // Added event listener to the document because it will work for dynamically generated elements
 // $(".country").on("click") will only add listeners to elements that are on the page at that time
 
-
+//Fun tion below intakes the button User pressed and retrieves data from host
+//Created two additional variables.  The selectCountry variable for the input data
+// and the buttonCountry variable which is the UI button User presses that also fethes
+//data from host site.
 function alertCountryName() {
     let selCountry = $(this).attr("data-name");
-
-    alert(selCountry);
+    let buttonCountry = "http://api.giphy.com/v1/gifs/search?q=" + selCountry + apiKey + "&limit=10";
+    alert(buttonCountry);
 }
-// Function for displaying COuntries data
+// Function for displaying (country) buttons based on User's input
 function renderButtons() {
 
     // Deleting the Countries prior to adding new countries
@@ -97,14 +113,16 @@ function renderButtons() {
 
 $("#searchBtn").on('click', function (event) {
 
-    // Preventing the buttons default behavior when clicked (which is submitting a form)
+    let tenGifs = "";
+    //This prevents the buttons default behavior when clicked (which is submitting a form)
     event.preventDefault();
-    // This line grabs the input from the textbox
-    queryCountry = $("#country-input").val().trim();
-    console.log(queryCountry);
-    queryURL = "http://api.giphy.com/v1/gifs/search?q=" + queryCountry + apiKey;
+    //This line grabs the input from the textbox
+    //Created additional variable (queryCountry) to capture the value or country the User types in.
 
-    runQuery(10, queryURL)
+    queryCountry = $("#country-input").val().trim();
+    console.log(queryCountry + "....hi");
+    queryURL = "http://api.giphy.com/v1/gifs/search?q=" + queryCountry + apiKey + "&limit=10";
+    runQuery(tenGifs, queryURL)
     console.log(queryURL);
     // Adding the country from the textbox to our array
     displayCountries.push(queryCountry);
@@ -119,7 +137,8 @@ $(document).on("click", ".country", alertCountryName);
 
 // Calling the renderButtons function to display the intial buttons
 renderButtons();
-console.log(queryCountry);
+
+
 
 
 
