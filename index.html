@@ -28,46 +28,37 @@
 
         <div class="jumbotron">
 
-            <div class="container" id="testTimer">
+            <div class="container">
                 <div class="row">
-                    <div class="col-md-12">
-                        <h1 class="display-4" id="gameTitle">Geogiphy</h1>
+                    <div class="col-md">
+                        <h1 class="display-4" id="appTitle">Geogiphy</h1>
                         <p class="lead">
                             <h3 id="tagLine">Interesting Gifs by Country</h3>
                         </p>
                         <form role="form">
-                            <!-- Text box for capturing the search term-->
+                            <!-- Text box for capturing the searched Country name-->
                             <div class="form-group">
                                 <label for="search" id="search-label">Add a country:</label>
-                                <input type="text" class="form-control" id="search">
+                                <input type="text" class="form-control" placeholder="country" id="country-input">
                                 <br>
                                 <button type="submit" class="btn btn-success btn-lg" id="searchBtn"
                                     data-toggle="tooltip" title="Go ahead...Push me!">Search</button>
                             </div>
                         </form>
-                        <img src="./assets/images/giphyAttr.gif" style="width:150px;">
+                        <img src="./assets/images/giphyAttr.gif" id="giphyAttr" style="width:125px;">
                     </div>
                 </div>
             </div>
-
-            <hr class="my-4">
-
-
-            <p class="triviaFont" id="question1">
-                <h3></h3>
-            </p>
-            <p class="triviaFont" id="choices"></p>
-            <p class="triviaFont" id="skipBtn"></p>
-            <p class="triviaFont" id="msg2"></p>
-
-            <!-- Change ID below to shorten length of input box -->
-
-
+            <hr>
+            <div class="row">
+                <div class="col-md">
+                    <div id="country-buttons">skjfdnlksj</div>
+                </div>
+            </div>
         </div>
 
         <div class="container">
             <div class="row" id="triviaQuestion">
-                <h3 id="trivia"></h3>
 
             </div>
 

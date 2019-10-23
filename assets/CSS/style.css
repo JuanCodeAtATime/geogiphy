@@ -13,33 +13,13 @@ body {
     align-items: center;
     display: flex;
     justify-content: center;
-    width: 100vw;
-    height: 100vh;
+    
 }
 
-#question1 {
-    font-size: 20px;
-}
-
-#timer {
-    /* This timer is placed in the horizontal red button 
-    that spans the jumbotron container */
-    height: auto;
-    font-size: 25px;
-    font-family: 'Michroma', sans-serif;
-    width: 100%;
-    margin: 10px;
-    align-content: center;
-    box-shadow: 0 0 10px 2px;
-    white-space: normal;
-    text-align: center;
-
-}
-
-#gameTitle {
+#appTitle {
     font-size: 50px;
     font-family: 'Michroma', sans-serif;
-    font-weight: bold;
+    font-weight: bolder;
     margin: 0;
     padding-top: 0;
     align-content: center;
@@ -57,22 +37,38 @@ body {
     opacity: .87;
     box-shadow: 0 0 10px 2px;
     align-content: center;
-    padding-top: 35px;
-    
+    padding-top: 15px;
+    width: 100%;
+    margin-top: 20px;    
 }
 
-.triviaFont {
+#search-label, #searchBtn {
     font-family: 'Michroma', sans-serif;
-    font-weight: bold;
     align-content: center;
 }
 
 .mainContainer {
    /* I chose 75% for the game box as it 
    seemed aesthetically better than spanning 100% of the screen */
-    width: 40%;
-    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    float: left;
+    margin-left:75px;
 }
+
+#country-buttons {
+
+    /* float: left; */
+    display: grid;
+    grid-template-columns: repeat(4, auto) ;
+    gap: 7px;
+    border-radius: 10px;
+    /* margin-right: 75px; */
+    font-family: 'Michroma', sans-serif;
+    font-size: .75rem;
+    
+}
+
 
 #button-primary {
     font-weight: 100;
@@ -85,6 +81,11 @@ body {
     grid-template-columns: repeat(2, auto) ;
     gap: 7px;
     border-radius: 10px;
+}
+
+img {
+ border-radius: 5px;
+
 }
 
 /* Font families inventory:
