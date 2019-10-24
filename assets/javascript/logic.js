@@ -51,21 +51,27 @@ function runQuery(queryURL) {
     })
         .then(function (response) {
 
-            let imageUrl = response.data[0].images.original.url;  //Fix this....Reference the Cat activity
-            console.log(imageUrl)
+            for (let i = 0; i < 10; i++) {
+                let imageUrl = response.data[0, i].images.original.url;
+                console.log(imageUrl)
 
 
-            // Creating and storing an image tag
-            let countryGifs = $("<img>");
+                // Creating and storing an image tag
+                let countryGifs = $("<img>");
 
-            // Setting the countryGifs src attribute to imageUrl
+                // Setting the countryGifs src attribute to imageUrl
 
-            countryGifs.attr("src", imageUrl);
-            countryGifs.attr("alt", "country gifs");
+                countryGifs.attr("src", imageUrl);
+                countryGifs.attr("alt", "country gifs");
 
-            // Prepending the countryGifs to the images div
-            $("#gifs").prepend(countryGifs);
+                // Prepending the countryGifs to the images div
+                $("#gifs").prepend(countryGifs);
+
+            }
+
         });
+
+
 
 }
 // MAIN PROCESSES

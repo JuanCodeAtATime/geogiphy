@@ -1,8 +1,12 @@
 /* Things I want to see:
     Dropdown with all countries names
     Search icon/magnafying glass
-    Stylized buttons with the User's selected countries
-    Prepended gifs */
+    Stylized buttons with the User's selected countries (Done)
+    Prepended gifs (Done)
+    Margins to separate the gifs (Done)
+    Align content to center gifs
+    Still Gifs that turn Animated upon clicking Gifs (Done
+    */
 
 
 body {
@@ -84,6 +88,10 @@ body {
 
 img {
  border-radius: 5px;
+ margin: 5px;
+ width: 125px;
+ /* height: 125px; */
+ 
 
 }
 
