@@ -3,7 +3,7 @@
 // 2. Capture User input 
 // 3. Convert User inputs into values in order to specify
 //    data type and quantity to retrieve from host (giphy.com)
-// 4. Creat for loop that retrieves number of gifs requested by User
+// 4. Creat for loop that retrieves all 10 requested gifs requested of host site (Giphy.com)
 // 5.  Create Array of countries
 // 6. Create code to dynamically generate HTML content
 //7. Create variable that links default country buttons w/queryURL to retrieve content from host
@@ -15,6 +15,8 @@ let giphyURLBase = "http://api.giphy.com/v1/gifs/search";
 let queryCountry = "";
 let numOfGifs = "";
 let inputCountry = "";
+let selCountry = "";
+let buttonCountry = "http://api.giphy.com/v1/gifs/search?q=" + selCountry + apiKey + "&limit=10";
 
 //These are the default countries displayed for User 
 let displayCountries = ["Afghanistan", "Brazil", "Canada", "China",
@@ -43,6 +45,9 @@ let country_list = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "A
 
 function runQuery(queryURL) {
 
+    selCountry = $(this).attr("data-name");
+    buttonCountry = "http://api.giphy.com/v1/gifs/search?q=" + selCountry + apiKey + "&limit=10";
+
     queryURL = "http://api.giphy.com/v1/gifs/search?q=" + queryCountry + apiKey + "&limit=10";
 
     $.ajax({
@@ -53,25 +58,42 @@ function runQuery(queryURL) {
 
             for (let i = 0; i < 10; i++) {
                 let imageUrl = response.data[0, i].images.original.url;
-                console.log(imageUrl)
-
+                let stillImageUrl = response.data[0, i].images.original_still.url;
 
                 // Creating and storing an image tag
                 let countryGifs = $("<img>");
 
-                // Setting the countryGifs src attribute to imageUrl
+                // Setting the countryGifs src attribute to stillImageUrl for still gifs
+                // and imageUrl for animated gifs....Not working.  Leaving animated for now (10/24/19)
 
-                countryGifs.attr("src", imageUrl);
+                // countryGifs.attr("src", stillImageUrl, "data-still", stillImageUrl,
+                //     "data-animate", imageUrl, "data-state", "still");
                 countryGifs.attr("alt", "country gifs");
+                countryGifs.attr("src", imageUrl)
+
 
                 // Prepending the countryGifs to the images div
                 $("#gifs").prepend(countryGifs);
 
+                $("#gifs").on("click", function () {
+                    //Probably need for each method to limit clicks to individual gifs
+                    // console.log("gif clicked!!")
+                    let state = $(this).attr("data-state");
+                    // If the clicked image's state is still, update its src attribute to what its data-animate value is.
+                    // Then, set the image's data-state to animate
+                    // Else set src to the data-still value
+                    if (state === "still") {
+                        $(this).attr("src", $(this).attr("data-animate"));
+                        $(this).attr("data-state", "animate");
+                    } else {
+                        $(this).attr("src", $(this).attr("data-still"));
+                        $(this).attr("data-state", "still");
+
+                    }
+                });
             }
 
         });
-
-
 
 }
 // MAIN PROCESSES
