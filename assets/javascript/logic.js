@@ -20,8 +20,8 @@ let buttonCountry = "http://api.giphy.com/v1/gifs/search?q=" + selCountry + apiK
 
 //These are the default countries displayed for User 
 let displayCountries = ["Afghanistan", "Brazil", "Canada", "China",
-    "Cuba", "Ethiopia", "Greece", "Guatemala", "Haiti", "India",
-    "Israel", "Mexico", "United Kingdom", "United States"];
+    "Cuba", "Guatemala", "Haiti", "India",
+    "Israel", "Mexico", "United States"];
 
 //Array of countries for Auto-complete feature to enhance UX
 let country_list = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla", "Antigua &amp; Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas"
@@ -63,32 +63,33 @@ function runQuery(queryURL) {
                 // Creating and storing an image tag
                 let countryGifs = $("<img>");
 
-                // Setting the countryGifs src attribute to stillImageUrl for still gifs
-                // and imageUrl for animated gifs....Not working.  Leaving animated for now (10/24/19)
-
-                // countryGifs.attr("src", stillImageUrl, "data-still", stillImageUrl,
-                //     "data-animate", imageUrl, "data-state", "still");
-                countryGifs.attr("alt", "country gifs");
-                countryGifs.attr("src", imageUrl)
+                countryGifs.attr({
+                    "src": stillImageUrl,
+                    "data-still": stillImageUrl,
+                    "data-animate": imageUrl,
+                    "data-state": "still",
+                    "class": "gifs"
+                });
 
 
                 // Prepending the countryGifs to the images div
-                $("#gifs").prepend(countryGifs);
+                $(".gifs").prepend(countryGifs);
 
-                $("#gifs").on("click", function () {
-                    //Probably need for each method to limit clicks to individual gifs
-                    // console.log("gif clicked!!")
+                $(".gifs").on("click", function () {
                     let state = $(this).attr("data-state");
-                    // If the clicked image's state is still, update its src attribute to what its data-animate value is.
-                    // Then, set the image's data-state to animate
-                    // Else set src to the data-still value
+                    // $(this).attr("data-state") will either be "still" or "animate"
+                    // IF it's still: we change it to animate
                     if (state === "still") {
-                        $(this).attr("src", $(this).attr("data-animate"));
-                        $(this).attr("data-state", "animate");
-                    } else {
-                        $(this).attr("src", $(this).attr("data-still"));
-                        $(this).attr("data-state", "still");
 
+                        let newSrc = $(this).attr("data-animate");
+                        $(this).attr("src", newSrc);
+                        $(this).attr("data-state", "animate");
+
+                        // OTHERWISE it's animate already, so we change it to still
+                    } else {
+                        let newSrc = $(this).attr("data-still");
+                        $(this).attr("src", newSrc);
+                        $(this).attr("data-state", "still");
                     }
                 });
             }
