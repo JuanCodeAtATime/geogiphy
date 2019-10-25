@@ -23,8 +23,11 @@ let displayCountries = ["Afghanistan", "Brazil", "Canada", "China",
     "Cuba", "Guatemala", "Haiti", "India",
     "Israel", "Mexico", "United States"];
 
+// //This same variable below deafults to no countries in the display panel.  
+// let displayCountries = [];
+
 //Array of countries for Auto-complete feature to enhance UX
-let country_list = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla", "Antigua &amp; Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas"
+let countryList = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla", "Antigua &amp; Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas"
     , "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia &amp; Herzegovina", "Botswana", "Brazil", "British Virgin Islands"
     , "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Chad", "Chile", "China", "Colombia", "Congo", "Cook Islands", "Costa Rica"
     , "Cote D Ivoire", "Croatia", "Cruise Ship", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea"
@@ -45,9 +48,7 @@ let country_list = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "A
 
 function runQuery(queryURL) {
 
-    selCountry = $(this).attr("data-name");
-    buttonCountry = "http://api.giphy.com/v1/gifs/search?q=" + selCountry + apiKey + "&limit=10";
-
+    queryCountry = $("#country-input").val().trim();
     queryURL = "http://api.giphy.com/v1/gifs/search?q=" + queryCountry + apiKey + "&limit=10";
 
     $.ajax({
@@ -55,8 +56,11 @@ function runQuery(queryURL) {
         method: "GET"
     })
         .then(function (response) {
-
-            for (let i = 0; i < 10; i++) {
+            // add error handling here
+            // if the user enters bad data, what does the response object look like?
+            // How can we differentiate between good and bad response?
+            // What do we want to do when we get a good response?  A bad response?
+            for (let i = 0; i < 100; i++) {
                 let imageUrl = response.data[0, i].images.original.url;
                 let stillImageUrl = response.data[0, i].images.original_still.url;
 
@@ -97,24 +101,63 @@ function runQuery(queryURL) {
         });
 
 }
-// MAIN PROCESSES
 
-//Upon clicking Search button, this function reads the User input value and 
-//retrieves the data from the queryURL 
+// AJAX call for queryURL2 is here.  Needed additional call for User buttons. 
 
-// Function for displaying the countries info
-// Added a click event listener to all elements with the class "country"
-// Added event listener to the document because it will work for dynamically generated elements
-// $(".country").on("click") will only add listeners to elements that are on the page at that time
+function runQuery2(queryURL2) {
+    selCountry = $(this).attr("data-name");
+    queryURL2 = "http://api.giphy.com/v1/gifs/search?q=" + selCountry + apiKey + "&limit=10";
+    alert(queryURL2);
 
-//Fun tion below intakes the button User pressed and retrieves data from host
-//Created two additional variables.  The selectCountry variable for the input data
-// and the buttonCountry variable which is the UI button User presses that also fethes
-//data from host site.
-function alertCountryName() {
-    let selCountry = $(this).attr("data-name");
-    let buttonCountry = "http://api.giphy.com/v1/gifs/search?q=" + selCountry + apiKey + "&limit=10";
-    alert(buttonCountry);
+    $.ajax({
+        url: queryURL2,
+        method: "GET"
+    })
+        .then(function (response) {
+            // add error handling here
+            // if the user enters bad data, what does the response object look like?
+            // How can we differentiate between good and bad response?
+            // What do we want to do when we get a good response?  A bad response?
+            for (let i = 0; i < 100; i++) {
+                let imageUrl = response.data[0, i].images.original.url;
+                let stillImageUrl = response.data[0, i].images.original_still.url;
+
+                // Creating and storing an image tag
+                let countryGifs = $("<img>");
+
+                countryGifs.attr({
+                    "src": stillImageUrl,
+                    "data-still": stillImageUrl,
+                    "data-animate": imageUrl,
+                    "data-state": "still",
+                    "class": "gifs"
+                });
+
+
+                // Prepending the countryGifs to the images div
+                $(".gifs").prepend(countryGifs);
+
+                $(".gifs").on("click", function () {
+                    let state = $(this).attr("data-state");
+                    // $(this).attr("data-state") will either be "still" or "animate"
+                    // IF it's still: we change it to animate
+                    if (state === "still") {
+
+                        let newSrc = $(this).attr("data-animate");
+                        $(this).attr("src", newSrc);
+                        $(this).attr("data-state", "animate");
+
+                        // OTHERWISE it's animate already, so we change it to still
+                    } else {
+                        let newSrc = $(this).attr("data-still");
+                        $(this).attr("src", newSrc);
+                        $(this).attr("data-state", "still");
+                    }
+                });
+            }
+
+        });
+
 }
 // Function for displaying (country) buttons based on User's input
 function renderButtons() {
@@ -143,17 +186,24 @@ function renderButtons() {
 $("#searchBtn").on('click', function (event) {
 
     let tenGifs = "";
+    selCountry = $(this).attr("data-name");
     //This prevents the buttons default behavior when clicked (which is submitting a form)
     event.preventDefault();
-    //This line grabs the input from the textbox
-    //Created additional variable (queryCountry) to capture the value or country the User types in.
 
+
+    //Created additional variable (queryCountry) which is the value captured
+    //when the User types in the search field.
     queryCountry = $("#country-input").val().trim();
-    console.log(queryCountry + "....hi");
+
+    //The User input value (queryCountry) is then concatenated with the API key below to create the queryURL
     queryURL = "http://api.giphy.com/v1/gifs/search?q=" + queryCountry + apiKey + "&limit=10";
+
     runQuery(tenGifs, queryURL)
-    console.log(queryURL);
-    // Adding the country from the textbox to our array
+
+    //The country buttons variable (selCountry) is also concatenated with the API key below to create the queryURL2
+    queryURL2 = "http://api.giphy.com/v1/gifs/search?q=" + selCountry + apiKey + "&limit=10";
+
+    // Adding the country from the textbox to our (buttons) array
     displayCountries.push(queryCountry);
     // return false;
 
@@ -162,7 +212,7 @@ $("#searchBtn").on('click', function (event) {
 });
 
 
-$(document).on("click", ".country", alertCountryName);
+$(document).on("click", ".country", runQuery2);
 
 // Calling the renderButtons function to display the intial buttons
 renderButtons();
