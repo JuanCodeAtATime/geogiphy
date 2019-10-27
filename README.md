@@ -12,7 +12,7 @@ The search field has no limitations and allows Users to search any term.  Althou
 
 Although there are pros and cons to both of these search parameter options, an array of all countries is saved in the JS file just incase we decide to modify this feature in the future.  
 
-The User should be able to retrieve an unlimited number of gifs (10 at a time).  Howeverm at the time of this writing, a major limitation of the app is that is only fetches a maximum of 20 gifs.  
+The User should be able to retrieve an unlimited number of gifs (10 at a time).  However, at the time of this writing, a major limitation of the app is that is only fetches a maximum of 20 gifs.  
 
 This app was developed (and maintained) by Juan Rivera.  It is his Week 6 homework project at the Harvard Extension School's Coding Bootcamp (Full Stack Developer Program).  
 
