@@ -1,16 +1,5 @@
-/* Things I want to see:
-    Dropdown with all countries names
-    Search icon/magnafying glass
-    Stylized buttons with the User's selected countries (Done)
-    Prepended gifs (Done)
-    Margins to separate the gifs (Done)
-    Align content to center gifs
-    Still Gifs that turn Animated upon clicking Gifs (Done
-    */
-
 
 body {
-/* These body properties placed my game in the center of the screen as desired. */
     margin: 0;
     background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url("../images/geography.jpg");
     background-size: cover;
@@ -20,6 +9,7 @@ body {
     
 }
 
+/* The appTitle ID controls the "Geogiphy" title properties*/
 #appTitle {
     font-size: 50px;
     font-family: 'Michroma', sans-serif;
@@ -74,6 +64,12 @@ body {
     
 }
 
+/* This default Bootstrap (form-group) class was adjusted such that decreasing the 
+bottom margin moved the green search button closer to the Giphy logo */
+.form-group {
+    margin-bottom: 5px;
+}
+
 
 #button-primary {
     font-weight: 100;
@@ -88,15 +84,15 @@ body {
     border-radius: 10px;
 }
 
-img {
+#giphyAttr {
  border-radius: 5px;
- margin: 5px;
+ margin: 5px 0px ;
  width: 125px;
- /* height: 125px; */
  
-
 }
 
+/* This is the gifs container.  I gave it an opacity slightly lighter 
+than its parent box to make it more of a focal point .  */
 .gifsContainer {
     background-color: rgba(255,255,255,0.95);
     box-shadow: 0 0 10px 2px;
@@ -105,6 +101,8 @@ img {
     width: 100%;
       
 }
+
+/* The gifsPara class contains the placeholder "Awesome Gifs Here" */
 
 .gifsPara {
     font-family: 'Shadows Into Light', cursive;
@@ -117,28 +115,32 @@ img {
     margin: 5px;
 }
 
+/* This double selector controls the gifs and the Ratings properties */
 .gifs img {
-   margin-bottom: 25px;
-   margin-top: 5px;
-   margin-right: 5px;
-   height: auto;
-   display: grid;
-   grid-template-columns: repeat(2, auto) ;
+    width: 125px;
+    height: auto;
+    padding: 0;
+    display: inline-block;
+    float: none;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    margin-right: 5px;
+    height: auto;
+    align-content: left;
+} 
 
-}
-
-/* This selector controls the Ratings visual characteristics */
 .gifs p {
+    margin: 0;
+    padding-right: 5px;
     font-family: 'Michroma', sans-serif;
     font-size: 10px;
     font-weight: bold;
-    padding: 0;
-    margin-bottom: 0;
     display: inline-block;
-    text-align: justify;
-    display: grid;
-    grid-template-columns: repeat(2, auto) ; 
-} 
+    float: none;
+       
+}
+
+
 
 /* Font families inventory:
 font-family: 'Inconsolata', monospace;

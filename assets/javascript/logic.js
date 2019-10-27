@@ -2,7 +2,7 @@
 // 1. Get API key from giphy.com
 // 2. Capture User input 
 // 3. Convert User inputs into values in order to specify
-//    data type and quantity to retrieve from host (giphy.com)
+//    country type and quantity to retrieve from host (giphy.com)
 // 4. Creat for loop that retrieves all 10 requested gifs requested of host site (Giphy.com)
 // 5.  Create Array of countries
 // 6. Create code to dynamically generate HTML content
@@ -11,11 +11,10 @@
 // INITIALIZING VARIABLES
 const apiKey = "&api_key=qFPDlYolJg3rML8RnElRJqnG83lhOD3T";
 const apiLimitTen = "&api_key=qFPDlYolJg3rML8RnElRJqnG83lhOD3T&limit=10";
-let trendingAPI = "http://api.giphy.com/v1/gifs/trending?api_key=" + apiKey;
-let giphyURLBase = "http://api.giphy.com/v1/gifs/search";
+let giphyURLBase = "https://api.giphy.com/v1/gifs/search";
 let queryCountry = "";
 let selCountry = "";
-let buttonCountry = "http://api.giphy.com/v1/gifs/search?q=" + selCountry + apiLimitTen;
+let buttonCountry = "https://api.giphy.com/v1/gifs/search?q=" + selCountry + apiLimitTen;
 
 //These are the default country buttons displayed for User 
 let displayCountries = ["Afghanistan", "Brazil", "Canada", "China",
@@ -23,10 +22,11 @@ let displayCountries = ["Afghanistan", "Brazil", "Canada", "China",
     "Israel", "Mexico", "United States"];
 
 // FUNCTIONS
-
+//Arguments in function below include queryURL and "search" variable which
+// is the country button pressed by User 
 function runQuery(queryURL, search) {
 
-    queryURL = "http://api.giphy.com/v1/gifs/search?q=" + search + apiLimitTen;
+    queryURL = "https://api.giphy.com/v1/gifs/search?q=" + search + apiLimitTen;
 
     $.ajax({
         url: queryURL,
@@ -56,6 +56,7 @@ function runQuery(queryURL, search) {
                 // Prepending the countryGifs to the images div
                 let gifsDiv = $(".gifs").prepend(countryGifs);
 
+                //Prepending the Ratings paragraph element to the gifsDiv
                 gifsDiv.prepend(p);
 
 
@@ -63,7 +64,7 @@ function runQuery(queryURL, search) {
                 $(".gifs").on("click", function () {
                     let state = $(this).attr("data-state");
                     // $(this).attr("data-state") will either be "still" or "animate"
-                    // If it's still: we change it to animate on click
+                    // If it's still: User can animate on click
                     if (state === "still") {
 
                         let newSrc = $(this).attr("data-animate");
@@ -110,7 +111,7 @@ function renderButtons() {
 
 $("#searchBtn").on('click', function (event) {
 
-    //selCountry variable from above is the variable of the country buttons
+    //selCountry variable is for the country buttons
     selCountry = $(this).attr("data-name");
     queryCountry = $("#country-input").val().trim();
 
@@ -137,10 +138,10 @@ $(document).on("click", ".country", function () {
 renderButtons();
 
 //I included (but did not activate) an array containing all countries.  The original plan
-//was to have an auto-complete feature with a drop-down of all the countries in this array. 
+//was to have an auto-complete feature containing a drop-down of all the countries in this array. 
 //I aborted that goal as it exceeded MVP expectations.  However, the variable still exists
 //herein incase I want to add that feature in the future.
-//Array of countries for Auto-complete feature to enhance UX
+
 // let countryList = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla", "Antigua &amp; Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas"
 //     , "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia &amp; Herzegovina", "Botswana", "Brazil", "British Virgin Islands"
 //     , "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Chad", "Chile", "China", "Colombia", "Congo", "Cook Islands", "Costa Rica"
