@@ -53,11 +53,13 @@ body {
 
 .mainContainer {
    /* I chose 65% for the main box as it 
-   seemed aesthetically better than spanning 100% of the screen */
-    width: 65%;
+   seemed aesthetically better than spanning 100% of the screen.  
+   The min-width property is set to 390px to prevent collapsing or text overflow on smaller devices */
+    width: 65%;    
+    min-width: 390px;
     display: flex;
     float: left;
-    /* margin: ; */
+   
 }
 
 #country-buttons {
