@@ -32,7 +32,7 @@ function runQuery(queryURL, search) {
         url: queryURL,
         method: "GET"
     })
-        .then(function (response) {
+        .done(function (response) {
 
             for (let i = 0; i < response.data.length; i++) {
                 let imageUrl = response.data[0, i].images.original.url;
@@ -54,31 +54,33 @@ function runQuery(queryURL, search) {
                 let p = $("<p>").text("Rating: " + response.data[0, i].rating);
 
                 // Prepending the countryGifs to the images div
-                let gifsDiv = $(".gifs").prepend(countryGifs);
+                let gifsDiv = $("#gifsHere").prepend(countryGifs);
 
                 //Prepending the Ratings paragraph element to the gifsDiv
                 gifsDiv.prepend(p);
 
-
-
-                $(".gifs").on("click", function () {
-                    let state = $(this).attr("data-state");
-                    // $(this).attr("data-state") will either be "still" or "animate"
-                    // If it's still: User can animate on click
-                    if (state === "still") {
-
-                        let newSrc = $(this).attr("data-animate");
-                        $(this).attr("src", newSrc);
-                        $(this).attr("data-state", "animate");
-
-                        // OTHERWISE it's animate already, so we change it to still
-                    } else {
-                        let newSrc = $(this).attr("data-still");
-                        $(this).attr("src", newSrc);
-                        $(this).attr("data-state", "still");
-                    }
-                });
             }
+
+            $(".gifs").on("click", function () {
+                let state = $(this).attr("data-state");
+                // $(this).attr("data-state") will either be "still" or "animate"
+                // If it's still: User can animate on click
+                if (state === "still") {
+
+                    let newSrc = $(this).attr("data-animate");
+                    $(this).attr("src", newSrc);
+                    $(this).attr("data-state", "animate");
+
+                    // OTHERWISE it's animate already, so we change it to still
+                } else {
+                    let newSrc = $(this).attr("data-still");
+                    $(this).attr("src", newSrc);
+                    $(this).attr("data-state", "still");
+                }
+
+
+            });
+
 
         });
 
@@ -95,7 +97,7 @@ function renderButtons() {
     // Looping through the countries list array
     for (let i = 0; i < displayCountries.length; i++) {
 
-        // Here we dynamically generate buttons for each country in the array
+        // Dynamically generating buttons for each country in the array
 
         let a = $("<button>");
         // Adding a class of country to our button
@@ -115,8 +117,8 @@ $("#searchBtn").on('click', function (event) {
     selCountry = $(this).attr("data-name");
     queryCountry = $("#country-input").val().trim();
 
-    //This runQuery function written above is called here and 
-    //also runs query for the country buttons
+    //This runQuery function called here runs the query the User types in.  Without this
+    //call, the User input creates a button, but doesn't fetch the data from the host site.
     runQuery("", queryCountry);
 
     //This prevents the buttons default behavior when clicked (which is submitting a form)
@@ -130,8 +132,10 @@ $("#searchBtn").on('click', function (event) {
 });
 
 $(document).on("click", ".country", function () {
+
     let selCountry = $(this).attr("data-name");
     runQuery("", selCountry)
+
 });
 
 // Calling the renderButtons function to display the intial buttons
